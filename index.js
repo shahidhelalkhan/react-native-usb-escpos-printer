@@ -31,6 +31,10 @@ var printBillTextWithCut = (billText) => {
   RNPrinter.printRawData(buffer.toString("base64"))
 }
 
+var printRawData = (data) => {
+  RNPrinter.printRawData(data)
+}
+
 var closeConn = () => RNPrinter.closeConn();
 
 
@@ -39,5 +43,6 @@ export const RNUSBPrinter = {
   connectPrinter,
   printText,
   printBillTextWithCut,
+  printRawData,
   closeConn
 }
