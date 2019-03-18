@@ -101,7 +101,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void printerInit(final Promise promise){
-        if(adapter.printText(PrinterCommand.POS_Set_PrtInit())){
+        if(adapter.printData(PrinterCommand.POS_Set_PrtInit())){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -110,7 +110,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void printAndFeed(int feed,final Promise promise){
-        if(adapter.printText(PrinterCommand.POS_Set_PrtAndFeedPaper(feed))){
+        if(adapter.printData(PrinterCommand.POS_Set_PrtAndFeedPaper(feed))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -119,7 +119,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void printerLeftSpace(int sp,final Promise promise){
-        if(adapter.printText(PrinterCommand.POS_Set_LeftSP(sp))){
+        if(adapter.printData(PrinterCommand.POS_Set_LeftSP(sp))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -132,7 +132,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
         if(sp>0){
             command = PrinterCommand.POS_Set_LineSpace(sp);
         }
-        if(command==null || !adapter.printText(command)){
+        if(command==null || !adapter.printData(command)){
             promise.reject("COMMAND_NOT_SEND");
         }else{
             promise.resolve(null);
@@ -145,7 +145,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void printerUnderLine(int line,final Promise promise){
-        if(adapter.printText(PrinterCommand.POS_Set_UnderLine(line))){
+        if(adapter.printData(PrinterCommand.POS_Set_UnderLine(line))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -162,7 +162,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void printerAlign(int align,final Promise promise){
         Log.d(TAG,"Align:"+align);
-        if(adapter.printText(PrinterCommand.POS_S_Align(align))){
+        if(adapter.printData(PrinterCommand.POS_S_Align(align))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -192,7 +192,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 //            }
 
             byte[] bytes = PrinterCommand.POS_Print_Text(toPrint, encoding, codepage, widthTimes, heigthTimes, fonttype);
-            if (adapter.printText(bytes)) {
+            if (adapter.printData(bytes)) {
                 promise.resolve(null);
             } else {
                 promise.reject("COMMAND_NOT_SEND");
@@ -340,7 +340,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
             try {
 //                byte[] toPrint = rowsToPrint[i].toString().getBytes("UTF-8");
 //                String text = new String(toPrint, Charset.forName(encoding));
-                if (!adapter.printText(PrinterCommand.POS_Print_Text(rowsToPrint[i].toString(), encoding, codepage, widthTimes, heigthTimes, fonttype))) {
+                if (!adapter.printData(PrinterCommand.POS_Print_Text(rowsToPrint[i].toString(), encoding, codepage, widthTimes, heigthTimes, fonttype))) {
                     promise.reject("COMMAND_NOT_SEND");
                     return;
                 }
@@ -382,20 +382,20 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
              * Returns: byte[]
              */
             byte[] data = PrintPicture.POS_PrintBMP(mBitmap, width, nMode, leftPadding);
-            //  adapter.printText(buffer);
-            adapter.printText(Command.ESC_Init);
-            adapter.printText(Command.LF);
-            adapter.printText(data);
-            adapter.printText(PrinterCommand.POS_Set_PrtAndFeedPaper(30));
-            adapter.printText(PrinterCommand.POS_Set_Cut(1));
-            adapter.printText(PrinterCommand.POS_Set_PrtInit());
+            //  adapter.printData(buffer);
+            adapter.printData(Command.ESC_Init);
+            adapter.printData(Command.LF);
+            adapter.printData(data);
+            adapter.printData(PrinterCommand.POS_Set_PrtAndFeedPaper(30));
+            adapter.printData(PrinterCommand.POS_Set_Cut(1));
+            adapter.printData(PrinterCommand.POS_Set_PrtInit());
         }
     }
 
 
     @ReactMethod
     public void selfTest(@Nullable Callback cb) {
-        boolean result = adapter.printText(PrinterCommand.POS_Set_PrtSelfTest());
+        boolean result = adapter.printData(PrinterCommand.POS_Set_PrtSelfTest());
         if (cb != null) {
             cb.invoke(result);
         }
@@ -407,7 +407,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void rotate(int rotate,final Promise promise) {
-        if(adapter.printText(PrinterCommand.POS_Set_Rotate(rotate))){
+        if(adapter.printData(PrinterCommand.POS_Set_Rotate(rotate))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -416,7 +416,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setBlob(int weight,final Promise promise) {
-        if(adapter.printText(PrinterCommand.POS_Set_Bold(weight))){
+        if(adapter.printData(PrinterCommand.POS_Set_Bold(weight))){
             promise.resolve(null);
         }else{
             promise.reject("COMMAND_NOT_SEND");
@@ -458,7 +458,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
             //TODO: may need a left padding to align center.
             byte[] data = PrintPicture.POS_PrintBMP(bitmap, size, 0, 0);
-            if (adapter.printText(data)) {
+            if (adapter.printData(data)) {
                 promise.resolve(null);
             } else {
                 promise.reject("COMMAND_NOT_SEND");
@@ -472,7 +472,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     public void printBarCode(String str, int nType, int nWidthX, int nHeight,
                              int nHriFontType, int nHriFontPosition) {
         byte[] command = PrinterCommand.getBarCodeCommand(str, nType, nWidthX, nHeight, nHriFontType, nHriFontPosition);
-        adapter.printText(command);
+        adapter.printData(command);
     }
 
     // 根据Unicode编码完美的判断中文汉字和符号

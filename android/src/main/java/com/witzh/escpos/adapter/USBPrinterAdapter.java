@@ -204,4 +204,25 @@ public class USBPrinterAdapter {
         }
     }
 
+    public boolean printData(byte[] data) {
+        final String rawData = data;
+        Log.v(LOG_TAG, "start to print data");
+        boolean isConnected = openConnection();
+        if(isConnected) {
+            Log.v(LOG_TAG, "Connected to device");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int b = mUsbDeviceConnection.bulkTransfer(mEndPoint, data, data.length, 100000);
+                    Log.i(LOG_TAG, "Return Status: b-->"+b);
+                }
+            }).start();
+            return true;
+        }else{
+            Log.v(LOG_TAG, "failed to connected to device");
+            return false;
+        }
+    }
+    }
+
 }
