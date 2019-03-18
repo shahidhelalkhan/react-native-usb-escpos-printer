@@ -13,7 +13,7 @@ import java.util.List;
  * Created by bondwp322 on 2017/10/9.
  */
 
-public class RNUsbPrinterModule implements ReactPackage {
+public class RNUsbPrinterPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(new NativeModule[]{
