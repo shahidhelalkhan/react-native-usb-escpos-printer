@@ -205,7 +205,6 @@ public class USBPrinterAdapter {
     }
 
     public boolean printData(byte[] data) {
-        final String rawData = data;
         Log.v(LOG_TAG, "start to print data");
         boolean isConnected = openConnection();
         if(isConnected) {
