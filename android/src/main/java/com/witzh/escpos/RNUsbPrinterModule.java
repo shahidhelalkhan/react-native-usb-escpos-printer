@@ -109,7 +109,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void printAndFeed(int feed,final Promise promise){
+    public void printAndFeed(int feed, final Promise promise){
         if(adapter.printData(PrinterCommand.POS_Set_PrtAndFeedPaper(feed))){
             promise.resolve(null);
         }else{
@@ -118,7 +118,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void printerLeftSpace(int sp,final Promise promise){
+    public void printerLeftSpace(int sp, final Promise promise){
         if(adapter.printData(PrinterCommand.POS_Set_LeftSP(sp))){
             promise.resolve(null);
         }else{
@@ -127,7 +127,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void printerLineSpace(int sp,final Promise promise){
+    public void printerLineSpace(int sp, final Promise promise){
         byte[] command = PrinterCommand.POS_Set_DefLineSpace();
         if(sp>0){
             command = PrinterCommand.POS_Set_LineSpace(sp);
@@ -139,12 +139,22 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void printerCut(int cut, final Promise promise){
+        if(adapter.printData(PrinterCommand.POS_Set_Cut(cut))){
+            promise.resolve(null);
+        }
+        else{
+            promise.reject("COMMAND_NOT_SEND");
+        }
+    }
+
     /**
      * Under line switch, 0-off,1-on,2-deeper
      * @param line 0-off,1-on,2-deeper
      */
     @ReactMethod
-    public void printerUnderLine(int line,final Promise promise){
+    public void printerUnderLine(int line, final Promise promise){
         if(adapter.printData(PrinterCommand.POS_Set_UnderLine(line))){
             promise.resolve(null);
         }else{
@@ -160,7 +170,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
      * @param promise
      */
     @ReactMethod
-    public void printerAlign(int align,final Promise promise){
+    public void printerAlign(int align, final Promise promise){
         Log.d(TAG,"Align:"+align);
         if(adapter.printData(PrinterCommand.POS_S_Align(align))){
             promise.resolve(null);
@@ -204,7 +214,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void printColumn(ReadableArray columnWidths,ReadableArray columnAligns,ReadableArray columnTexts,
-                            @Nullable ReadableMap options,final Promise promise){
+                            @Nullable ReadableMap options, final Promise promise){
         if(columnWidths.size()!=columnTexts.size() || columnWidths.size()!=columnAligns.size()){
             promise.reject("COLUMN_WIDTHS_ALIGNS_AND_TEXTS_NOT_MATCH");
             return;
@@ -406,7 +416,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
      * @param rotate  0-no rotate, 1-rotate
      */
     @ReactMethod
-    public void rotate(int rotate,final Promise promise) {
+    public void rotate(int rotate, final Promise promise) {
         if(adapter.printData(PrinterCommand.POS_Set_Rotate(rotate))){
             promise.resolve(null);
         }else{
@@ -415,7 +425,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setBlob(int weight,final Promise promise) {
+    public void setBlob(int weight, final Promise promise) {
         if(adapter.printData(PrinterCommand.POS_Set_Bold(weight))){
             promise.resolve(null);
         }else{
