@@ -29,7 +29,7 @@ public class USBPrinterAdapter {
     private static USBPrinterAdapter mInstance;
 
 
-    private String LOG_TAG = "RNUSBPrinter";
+    private String LOG_TAG = "USBPrinterAdapter";
     private Context mContext;
     private UsbManager mUSBManager;
     private PendingIntent mPermissionIndent;
@@ -205,6 +205,7 @@ public class USBPrinterAdapter {
     }
 
     public boolean printData(byte[] data) {
+        final byte [] bytes = data;
         Log.v(LOG_TAG, "start to print data");
         boolean isConnected = openConnection();
         if(isConnected) {
@@ -212,7 +213,7 @@ public class USBPrinterAdapter {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    int b = mUsbDeviceConnection.bulkTransfer(mEndPoint, data, data.length, 100000);
+                    int b = mUsbDeviceConnection.bulkTransfer(mEndPoint, bytes, bytes.length, 100000);
                     Log.i(LOG_TAG, "Return Status: b-->"+b);
                 }
             }).start();

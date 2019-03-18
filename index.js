@@ -1,13 +1,7 @@
-import React, { NativeModules } from 'react-native';
+import { NativeModules } from 'react-native'
 
 
-import EPToolkit from 'escpos-printer-toolkit';
-
-var RNUsbPrinter = NativeModules.RNUsbPrinter;
-
-var getUSBDeviceList = () => RNUsbPrinter.getUSBDeviceList();
-
-var connectPrinter = (vendorId, productId) => RNUsbPrinter.connectPrinter(vendorId, productId);
+const { RNUsbPrinter } = NativeModules
 
 RNUsbPrinter.BARCODETYPE={
     UPC_A:65,//11<=n<=12
@@ -19,25 +13,15 @@ RNUsbPrinter.BARCODETYPE={
     CODABAR:71,//1<=n<=255
     CODE93:72,//1<=n<=255
     CODE128:73//2<=n<=255
-};
+}
 RNUsbPrinter.ROTATION={
     OFF:0,
     ON:1
-};
+}
 RNUsbPrinter.ALIGN={
     LEFT:0,
     CENTER:1,
     RIGHT:2
-};
-
-var closeConn = () => RNUsbPrinter.closeConn();
-
-
-export const RNUsbPrinter = {
-  getUSBDeviceList,
-  connectPrinter,
-  printText,
-  printBillTextWithCut,
-  printRawData,
-  closeConn
 }
+
+module.exports = { RNUsbPrinter }

@@ -34,7 +34,7 @@ import com.witzh.escpos.sdk.PrintPicture;
 public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     private USBPrinterAdapter adapter;
 
-    private static final String TAG = "RNUsbPrinterModule";
+    private static final String TAG = "RNUsbPrinter";
 
     public static final int WIDTH_58 = 384;
     public static final int WIDTH_80 = 576;
@@ -53,7 +53,7 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "RNUsbPrinterModule";
+        return "RNUsbPrinter";
     }
 
     @ReactMethod

@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.witzh.escpos.RNUsbPrinterModule;
+
 /**
  * Created by bondwp322 on 2017/10/9.
  */
@@ -17,7 +19,7 @@ public class RNUsbPrinterPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(new NativeModule[]{
-                new RNPrinterModule(reactContext)
+                new RNUsbPrinterModule(reactContext)
         });
     }
 
