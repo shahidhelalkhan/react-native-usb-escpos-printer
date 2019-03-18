@@ -42,7 +42,6 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
     /******************************************************************************************************/
 
     private int deviceWidth = WIDTH_58;
-    private BluetoothService mService;
 
 
     public RNUsbPrinterModule(ReactApplicationContext reactContext) {
@@ -476,14 +475,6 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
         adapter.printText(command);
     }
 
-    private boolean adapter.printText(byte[] data) {
-        if (data==null || mService.getState() != BluetoothService.STATE_CONNECTED) {
-            return false;
-        }
-        mService.write(data);
-        return true;
-    }
-
     // 根据Unicode编码完美的判断中文汉字和符号
     private static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
@@ -497,11 +488,6 @@ public class RNUsbPrinterModule extends ReactContextBaseJavaModule {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void onBluetoothServiceStateChanged(int state, Map<String, Object> boundle) {
-
     }
 
     /****************************************************************************************************/
