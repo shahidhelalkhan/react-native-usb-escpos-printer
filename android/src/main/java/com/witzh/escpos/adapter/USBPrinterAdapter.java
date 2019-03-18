@@ -223,6 +223,5 @@ public class USBPrinterAdapter {
             return false;
         }
     }
-    }
 
 }
