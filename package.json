@@ -20,5 +20,5 @@
   },
   "dependencies": {
     "buffer": "^5.0.7"
-  },
+  }
 }
