@@ -1,4 +1,4 @@
-package cn.jystudio.bluetooth.escpos.command.sdk;
+package com.witzh.escpos.sdk;
 
 import android.graphics.*;
 
