@@ -1,4 +1,4 @@
-package com.pinmi.react.printer;
+package com.witzh.escpos;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by bondwp322 on 2017/10/9.
  */
 
-public class RNPrinterPackage implements ReactPackage {
+public class RNUsbPrinterModule implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(new NativeModule[]{

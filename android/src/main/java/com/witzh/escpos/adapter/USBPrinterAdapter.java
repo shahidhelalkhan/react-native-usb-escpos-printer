@@ -1,4 +1,4 @@
-package com.pinmi.react.printer.adapter;
+package com.witzh.escpos.adapter;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
