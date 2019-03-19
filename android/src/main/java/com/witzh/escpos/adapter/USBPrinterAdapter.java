@@ -61,12 +61,12 @@ public class USBPrinterAdapter {
                         Log.i(LOG_TAG, "success to grant permission for device "+usbDevice.getDeviceId()+", vendor_id: "+ usbDevice.getVendorId()+ " product_id: " + usbDevice.getProductId());
                         mUsbDevice = usbDevice;
                     }else {
-                        Toast.makeText(context, "用户拒绝获取USB设备权限" + usbDevice.getDeviceName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "No permission to access to Printer" + usbDevice.getDeviceName(), Toast.LENGTH_LONG).show();
                     }
                 }
             } else if(UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)){
                 if(mUsbDevice != null){
-                    Toast.makeText(context, "USB设备已经被关闭", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Printer has been detached.", Toast.LENGTH_LONG).show();
                     closeConnectionIfExists();
                 }
             }
@@ -204,7 +204,7 @@ public class USBPrinterAdapter {
         }
     }
 
-    public boolean printData(byte[] data) {
+    public synchronized boolean printData(byte[] data) {
         final byte [] bytes = data;
         Log.v(LOG_TAG, "start to print data");
         boolean isConnected = openConnection();
