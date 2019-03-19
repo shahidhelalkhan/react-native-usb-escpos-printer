@@ -3,7 +3,7 @@ import { NativeModules } from 'react-native'
 
 const { RNUsbPrinter } = NativeModules
 
-BluetoothEscposPrinter.ERROR_CORRECTION = {
+RNUsbPrinter.ERROR_CORRECTION = {
     L:1,
     M:0,
     Q:3,
