@@ -37,7 +37,7 @@ public class USBPrinterAdapter {
     private UsbDeviceConnection mUsbDeviceConnection;
     private UsbInterface mUsbInterface;
     private UsbEndpoint mEndPoint;
-    private static final String ACTION_USB_PERMISSION = "com.pinmi.react.USBPrinter.USB_PERMISSION";
+    private static final String ACTION_USB_PERMISSION = "com.witzh.escpos.USB_PERMISSION";
 
 
 
@@ -91,6 +91,7 @@ public class USBPrinterAdapter {
             mUsbInterface = null;
             mEndPoint = null;
             mUsbDeviceConnection = null;
+            mUsbDevice = null;
         }
     }
 
