@@ -3,6 +3,12 @@ import { NativeModules } from 'react-native'
 
 const { RNUsbPrinter } = NativeModules
 
+BluetoothEscposPrinter.ERROR_CORRECTION = {
+    L:1,
+    M:0,
+    Q:3,
+    H:2
+}
 RNUsbPrinter.BARCODETYPE={
     UPC_A:65,//11<=n<=12
     UPC_E:66,//11<=n<=12

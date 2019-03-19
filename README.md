@@ -1,5 +1,13 @@
 # react-native-usb-escpos-printer
 
+AndroidManifest.xml
+```
+  <application
+    android:allowBackup="true"
+  />
+  </application>
+```
+
 A React Native Library to support USB printer for Android platform 
 
 ## Installation
